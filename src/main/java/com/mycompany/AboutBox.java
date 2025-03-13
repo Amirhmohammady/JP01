@@ -1,3 +1,5 @@
+package com.mycompany;
+
 import java.awt.Frame;
 import javax.swing.JOptionPane;
 

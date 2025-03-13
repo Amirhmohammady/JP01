@@ -1,3 +1,5 @@
+package com.mycompany;
+
 import javax.swing.JOptionPane;
 
 import java.io.IOException;
