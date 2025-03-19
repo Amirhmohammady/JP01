@@ -1,5 +1,7 @@
 package com.mycompany;
 
+import com.mycompany.slidemodel.Slide;
+
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Dimension;

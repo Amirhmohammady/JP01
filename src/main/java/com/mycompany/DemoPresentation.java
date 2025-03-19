@@ -1,5 +1,8 @@
 package com.mycompany;
 
+import com.mycompany.slidemodel.BitmapItem;
+import com.mycompany.slidemodel.Slide;
+
 /** A built in demo-presentation
  * @author Ian F. Darwin, ian@darwinsys.com, Gert Florijn, Sylvia Stuurman
  * @version 1.1 2002/12/17 Gert Florijn
@@ -12,6 +15,7 @@ package com.mycompany;
 
 class DemoPresentation extends Accessor {
 
+	@Override
 	public void loadFile(Presentation presentation, String unusedFilename) {
 		presentation.setTitle("Demo Presentation");
 		Slide slide;
@@ -50,6 +54,7 @@ class DemoPresentation extends Accessor {
 		presentation.append(slide);
 	}
 
+	@Override
 	public void saveFile(Presentation presentation, String unusedFilename) {
 		throw new IllegalStateException("Save As->Demo! called");
 	}

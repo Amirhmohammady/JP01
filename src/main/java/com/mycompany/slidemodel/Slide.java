@@ -1,4 +1,6 @@
-package com.mycompany;
+package com.mycompany.slidemodel;
+
+import com.mycompany.Style;
 
 import java.awt.Graphics;
 import java.awt.Rectangle;
