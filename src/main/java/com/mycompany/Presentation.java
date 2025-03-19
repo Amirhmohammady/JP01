@@ -3,6 +3,7 @@ package com.mycompany;
 import com.mycompany.slidemodel.Slide;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * <p>Presentation maintains the slides in the presentation.</p>
@@ -12,19 +13,21 @@ import java.util.ArrayList;
  * @version 1.6 2014/05/16 Sylvia Stuurman
  */
 
-public class Presentation {
+public class Presentation implements MySubject {
     private String showTitle; // title of the presentation
     private ArrayList<Slide> showList = null; // an ArrayList with Slides
     private int currentSlideNumber = 0; // the slidenummer of the current Slide
-    private SlideViewerComponent slideViewComponent = null; // the viewcomponent of the Slides
+    //private SlideViewerComponent slideViewComponent = null; // the viewcomponent of the Slides
+    private List<MyObserver> myObservers = new ArrayList<>();
 
     public Presentation() {
-        slideViewComponent = null;
+        //slideViewComponent = null;
         clear();
     }
 
     public Presentation(SlideViewerComponent slideViewerComponent) {
-        this.slideViewComponent = slideViewerComponent;
+        //this.slideViewComponent = slideViewerComponent;
+        myObservers.add(slideViewerComponent);
         clear();
     }
 
@@ -40,9 +43,9 @@ public class Presentation {
         showTitle = nt;
     }
 
-    public void setShowView(SlideViewerComponent slideViewerComponent) {
+    /*public void setShowView(SlideViewerComponent slideViewerComponent) {
         this.slideViewComponent = slideViewerComponent;
-    }
+    }*/
 
     // give the number of the current slide
     public int getSlideNumber() {
@@ -52,9 +55,10 @@ public class Presentation {
     // change the current slide number and signal it to the window
     public void setSlideNumber(int number) {
         currentSlideNumber = number;
-        if (slideViewComponent != null) {
+        /*if (slideViewComponent != null) {
             slideViewComponent.update(this, getCurrentSlide());
-        }
+        }*/
+        notifyObservers();
     }
 
     // go to the previous slide unless your at the beginning of the presentation
@@ -97,5 +101,26 @@ public class Presentation {
 
     public void exit(int n) {
         System.exit(n);
+    }
+
+    @Override
+    public void addObserver(MyObserver observer) {
+        myObservers.add(observer);
+    }
+
+    @Override
+    public void removeObserver(MyObserver observer) {
+        myObservers.remove(observer);
+        /*for (int i = 0; i < myObservers.size(); i++)
+            if (myObservers.get(i) == observer) {
+                myObservers.remove(i);
+                break;
+            }*/
+    }
+
+    @Override
+    public void notifyObservers() {
+        for (MyObserver mo : myObservers)
+            mo.update(this, getCurrentSlide());
     }
 }
