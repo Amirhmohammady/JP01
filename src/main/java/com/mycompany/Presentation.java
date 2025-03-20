@@ -13,12 +13,12 @@ import java.util.List;
  * @version 1.6 2014/05/16 Sylvia Stuurman
  */
 
-public class Presentation implements MySubject {
+public class Presentation implements MyPublisher {
     private String showTitle; // title of the presentation
     private ArrayList<Slide> showList = null; // an ArrayList with Slides
     private int currentSlideNumber = 0; // the slidenummer of the current Slide
     //private SlideViewerComponent slideViewComponent = null; // the viewcomponent of the Slides
-    private List<MyObserver> myObservers = new ArrayList<>();
+    private List<MySubscriber> mySubscribers = new ArrayList<>();
 
     public Presentation() {
         //slideViewComponent = null;
@@ -27,7 +27,7 @@ public class Presentation implements MySubject {
 
     public Presentation(SlideViewerComponent slideViewerComponent) {
         //this.slideViewComponent = slideViewerComponent;
-        myObservers.add(slideViewerComponent);
+        mySubscribers.add(slideViewerComponent);
         clear();
     }
 
@@ -104,13 +104,13 @@ public class Presentation implements MySubject {
     }
 
     @Override
-    public void addObserver(MyObserver observer) {
-        myObservers.add(observer);
+    public void addObserver(MySubscriber observer) {
+        mySubscribers.add(observer);
     }
 
     @Override
-    public void removeObserver(MyObserver observer) {
-        myObservers.remove(observer);
+    public void removeObserver(MySubscriber observer) {
+        mySubscribers.remove(observer);
         /*for (int i = 0; i < myObservers.size(); i++)
             if (myObservers.get(i) == observer) {
                 myObservers.remove(i);
@@ -120,7 +120,7 @@ public class Presentation implements MySubject {
 
     @Override
     public void notifyObservers() {
-        for (MyObserver mo : myObservers)
+        for (MySubscriber mo : mySubscribers)
             mo.update(this, getCurrentSlide());
     }
 }

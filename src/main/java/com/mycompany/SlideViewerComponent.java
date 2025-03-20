@@ -21,7 +21,7 @@ import javax.swing.JFrame;
  * @version 1.6 2014/05/16 Sylvia Stuurman
  */
 
-public class SlideViewerComponent extends JComponent implements MyObserver{
+public class SlideViewerComponent extends JComponent implements MySubscriber {
 		
 	private Slide slide; // current slide
 	private Font labelFont = null; // font for labels
